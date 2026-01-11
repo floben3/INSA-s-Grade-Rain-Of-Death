@@ -1,0 +1,419 @@
+/* 
+ * Applies a global CSS reset.
+ * Removes default browser padding and margins to standardize layout behavior
+ * across user agents.
+ */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/*
+ * Forces both the root element and the document body to fully occupy the viewport.
+ * Guarantees predictable sizing for flex layouts and background scaling.
+ */
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+/*
+ * Defines the global page background.
+ * Pins the image to the viewport and scales it to cover the screen while
+ * preserving aspect ratio.
+ */
+body {
+    background-image: url("../assets/images/background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/*
+ * Provides a generic flex-based centering utility.
+ * Reuses this class across the UI to horizontally and vertically align content.
+ */
+.center {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+}
+
+/*
+ * Styles the main game title.
+ * Uses a retro arcade font and an outline stroke to maintain readability
+ * over a detailed background.
+ */
+#game-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+
+    margin: 4vh 1vw;
+
+    color: #ffffff;
+
+    -webkit-text-stroke: 0.2vh #b00000;
+}
+
+/*
+ * Styles the gameplay canvas.
+ * Keeps the canvas responsive, adds a neon border for emphasis,
+ * and applies a subtle blink to convey interactivity.
+ */
+canvas {
+    background: black;
+
+    width: 60vw;
+    height: auto;
+    max-height: 80vh;
+
+    margin: 1vh;
+
+    border-radius: 1.8vh;
+
+    border: 0.3vh solid #00faff;
+
+    box-shadow:
+        0 0 0.6vh #00faff,
+        0 0 1.4vh #00faff,
+        0 0 2.8vh #00e1ff,
+        0 0 4.8vh #00e1ff;
+
+    cursor: pointer;
+    touch-action: none;
+
+    animation: canvasBlink 1s infinite;
+    
+    transition: transform 0.15s ease;
+}
+
+/*
+ * Defines a subtle opacity animation for the canvas.
+ * Simulates a soft neon flicker without reducing gameplay clarity.
+ */
+@keyframes canvasBlink {
+    0%, 100% { opacity: 1; }
+    10%, 90% { opacity: 0.98; }
+    20%, 80% { opacity: 0.96; }
+    30%, 70% { opacity: 0.94; }
+    40%, 60% { opacity: 0.92; }
+    50%      { opacity: 0.90; }
+}
+
+/*
+ * Defines vertical spacing around the score container.
+ * Separates the score from gameplay and other UI blocks.
+ */
+#score {
+    margin-top: 3vh;
+    margin-bottom: 6vh;
+}
+
+/*
+ * Styles the score display.
+ * Uses a yellow neon theme and a blink animation to emphasize score prominence
+ * while keeping strong contrast against the background.
+ */
+#score-value {
+    display: inline-block;
+    width: fit-content;
+
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+
+    animation: scoreBlink 1.5s infinite;
+
+    color: #fff700;
+
+    background: rgba(30, 30, 30, 0.85);
+
+    padding: 1.2vh 1.8vw;
+    border-radius: 1vh;
+
+    border: 0.12em solid #fff700;
+
+    box-shadow:
+        0 0 0.6vh  #fff700,
+        0 0 1.4vh  #ffea00;
+
+    text-shadow:
+        0 0 0.2vh  #fff700,
+        0 0 0.6vh  #ffea00;
+}
+
+/*
+ * Defines the blinking animation used by the score display.
+ * Varies opacity and glow intensity to emulate an arcade-style LED flicker.
+ */
+@keyframes scoreBlink {
+    0%, 45%, 100% {
+        opacity: 1;
+        box-shadow:
+            0 0 0.6vh  #fff700,
+            0 0 1.4vh  #ffea00;
+    }
+
+    50% {
+        opacity: 0.35;
+        box-shadow:
+            0 0 0.2vh  #fff700;
+    }
+
+    55% {
+        opacity: 1;
+        box-shadow:
+            0 0 0.8vh  #fff700,
+            0 0 1.8vh  #ffea00;
+    }
+}
+
+/*
+ * Styles the highscores container.
+ * Uses compact typography and a cyan glow to match the HUD aesthetic.
+ */
+#highscores {
+    flex-direction: column;
+
+    margin-bottom: 4vh;
+
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    text-transform: uppercase;
+
+    text-shadow:
+        0 0 0.2vh #00faff,
+        0 0 0.6vh #00e1ff;
+}
+
+/*
+ * Highlights a special “majored” state using a blinking yellow emphasis.
+ * Uses this to draw attention to the rank 1.
+ */
+#majored {
+    animation: majoredBlink 1.5s infinite;
+
+    color: #fff700;
+    
+    text-shadow:
+        0 0 0.2vh  #fff700,
+        0 0 0.6vh  #ffea00;
+}
+
+/*
+ * Defines the blinking animation used for emphasized score elements.
+ */
+@keyframes majoredBlink {
+    0%, 45%, 100% { opacity: 1; }
+    50%          { opacity: 0.35; }
+    55%          { opacity: 1; }
+}
+
+/*
+ * Styles the highscores title banner.
+ * Increases visual hierarchy with a larger font and a glowing framed container.
+ */
+#highscores-title {
+    font-size: 2.5rem;
+    margin-top: 1vh;
+    margin-bottom: 3vh;
+    color: #ffffff;
+
+    -webkit-text-stroke: 0.2vh #00faff;
+
+    padding: 2vh 1.2vw;
+    border-radius: 1vh;
+    border: 0.12em solid white;
+
+    background-color: rgb(255, 255, 255, 0.25);
+
+    box-shadow:
+        0 0 0.6vh #00faff,
+        0 0 1.4vh #00faff,
+        0 0 2.8vh #00e1ff,
+        0 0 4.8vh #00e1ff;
+}
+
+/*
+ * Configures the highscores table layout.
+ * Uses a fixed layout to prevent column width jitter as content updates.
+ */
+#highscores-table {
+    max-width: 100vw;
+
+    border-collapse: collapse;
+    color: #00faff;
+
+    table-layout: fixed;
+}
+
+/*
+ * Defines consistent table cell spacing and alignment.
+ * Disables wrapping to keep row height stable and preserve alignment.
+ */
+#highscores-table th,
+#highscores-table td {
+    padding: 1.2vh 1vw;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/*
+ * Makes the highscores table body scrollable while keeping the header fixed.
+ * Improves readability when the score list exceeds the visible area.
+ */
+#highscores-table tbody {
+    display: block;
+    max-height: 30vh;
+    overflow-y: auto;
+
+    text-shadow:
+        0 0 0.4vh #00faff,
+        0 0 1vh   #00faff,
+        0 0 2vh   #00faff,
+        0 0 4vh   #00e1ff,
+        0 0 8vh   #00e1ff;
+}
+
+/*
+ * Ensures column alignment between header and body rows.
+ */
+#highscores-table thead,
+#highscores-table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+/*
+ * Styles the table header to clearly differentiate column labels.
+ */
+#highscores-table thead {
+    color: #ffffff;
+    
+    -webkit-text-stroke: 0.1vh #00faff;
+}
+
+/*
+ * Styles the retry button.
+ * Uses a neon blue theme and a pulsing animation to attract attention
+ * and communicate clickability.
+ */
+#retry {
+    border-radius: 2vh;
+    width: 15vw;
+    height: 10vh;
+    padding: 1vh;
+
+    cursor: pointer;
+
+    background-color: #00f;
+
+    box-shadow:
+        0 0 0.6vh rgba(0, 0, 255, 0.7),
+        0 0 1.6vh rgba(0, 0, 255, 0.6),
+        0 0 3.2vh rgba(0, 0, 255, 0.45);
+
+    animation: retryPulse 3.2s infinite;
+
+    transition: transform 0.15s ease;
+}
+
+/*
+ * Defines the pulsing animation used by the retry button.
+ * Modulates brightness and opacity to simulate a neon tube flicker.
+ */
+@keyframes retryPulse {
+    0%, 55% {
+        opacity: 1;
+        filter: brightness(1.1);
+    }
+
+    60% { opacity: 0.25; filter: brightness(0.8); }
+    65% { opacity: 1;    filter: brightness(1.2); }
+    70% { opacity: 0.25; filter: brightness(0.8); }
+    75% { opacity: 1;    filter: brightness(1.2); }
+    80% { opacity: 0.25; filter: brightness(0.8); }
+    85% { opacity: 1;    filter: brightness(1.2); }
+
+    100% {
+        opacity: 1;
+        filter: brightness(1.1);
+    }
+}
+
+/*
+ * Provides tactile feedback on hover for interactive elements.
+ * Uses a slight translation to mimic a physical button press.
+ */
+#retry:hover, .menu-button:hover, canvas:hover {
+    transition-duration: 10ms;
+    transition-property: transform;
+
+    transform: translate(0.5vh, 0.5vh);
+}
+
+/*
+ * Reinforces the pressed state during active interaction.
+ */
+#retry:active, .menu-button:active, canvas:active {
+  transform: translateX(0.5vh, 0.5vh);
+}
+
+/*
+ * Disables hover and active feedback for canvases explicitly marked as inactive.
+ * Uses this for non-interactive states such as previews or locked screens.
+ */
+canvas.no-hover-no-active {
+    transform: none;
+    cursor: none;
+}
+
+/*
+ * Styles generic menu buttons.
+ * Reuses the neon palette and typography to keep the UI visually consistent
+ * with the rest of the interface.
+ */
+.menu-button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    line-height: 3rem;
+    text-transform: uppercase;
+
+    margin: 2vh 2vw;
+
+    cursor: pointer;
+
+    background-color: rgb(0, 0, 0, 0.6);
+
+    box-shadow:
+        0 0 0.6vh #00faff,
+        0 0 1.4vh #00faff,
+        0 0 2.8vh #00e1ff,
+        0 0 4.8vh #00e1ff;
+
+    text-shadow:
+        0 0 0.2vh #00faff,
+        0 0 0.6vh   #00e1ff;
+
+    margin-bottom: 3vh;
+    color: #ffffff;
+
+    -webkit-text-stroke: 0.1vh #00faff;
+
+    padding: 2vh 1.2vw;
+    border-radius: 2vh;
+    border: 0.12em solid #00faff;
+
+    animation: retryPulse 3.2s infinite;
+
+    transition: transform 0.15s ease;
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- 
+            Defines the document character encoding.
+            Uses UTF-8 to ensure consistent rendering of accented and special characters.
+        -->
+        <meta charset="utf-8" />
+
+        <!-- 
+            Sets the page title displayed in the browser tab.
+            Reflects the game theme and provides a meaningful document label.
+        -->
+        <title>INSA’s Grade Rain of Death</title>
+
+        <!-- 
+            Defines the favicon displayed in the browser tab.
+            Uses the pixel-art character to match the game's visual identity.
+        -->
+        <link rel="icon" type="image/x-icon" href="./assets/images/pixel-caracter.png">
+
+        <!-- 
+            Loads the main stylesheet for layout, animations, and UI styling.
+        -->
+        <link rel="stylesheet" href="./css/game.css">
+
+        <!-- 
+            Loads the retro arcade font used across the UI.
+            Reinforces the pixel-art / old-school aesthetic.
+        -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    </head>
+
+    <body>
+        <!-- 
+            Game title container.
+            Uses a reusable centering utility to align the main title.
+        -->
+        <div class="center" id="title">
+            <h1 id="game-title">INSA’s Grade Rain of Death</h1>
+        </div>
+
+        <!-- 
+            Main game container.
+            Visibility is controlled at runtime depending on the current UI view.
+            Display one or two canvas elements depending on the number of players.
+        -->
+        <div class="center" id="game">
+            <!-- 
+                Primary canvas for Player 1.
+                Starts hidden and is toggled at runtime by JavaScript.
+            -->
+            <canvas id="myCanvas1" width="1000" height="600" style="display: none;"></canvas>
+
+            <!-- 
+                Secondary canvas for Player 2.
+                Displayed only when two-player mode is enabled.
+            -->
+            <canvas id="myCanvas2" width="900" height="600" style="display: none;"><button></button></canvas>
+        </div>
+
+        <!-- 
+            Score display container.
+            Visibility is controlled at runtime depending on the current UI view.
+        -->
+        <div class="center" id="score" style="display: none;">
+            <!-- 
+                Displays the score banner value.
+                Content is updated dynamically by JavaScript.
+            -->
+            <div id="score-value">Score:&nbsp;0</div>
+        </div>
+
+        <!-- 
+            Highscores screen container.
+            Shown when navigating to the highscores view.
+        -->
+        <div class="center" id="highscores" style="display: none;">
+            <!-- 
+                Highscores section title.
+                Provides a clear visual header for the scoreboard.
+            -->
+            <h2 id="highscores-title">High Scores</h2>
+
+            <!-- 
+                Highscores table.
+                The header is static; the body rows are generated dynamically.
+            -->
+            <table id="highscores-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 
+                        Populates rows at runtime via highscores.js.
+                    -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 
+            Action button container.
+            Visibility is controlled at runtime depending on the current UI view.
+            Hosts the retry control used to start or restart a run.
+        -->
+        <div class="center" id="button" style="display: none;">
+            <!-- 
+                Retry control rendered as an image element.
+                Click handling is wired in main.js.
+            -->
+            <img class="button" id="retry" src="./assets/images/retry.png" alt="Retry" />
+        </div>
+
+        <!-- 
+            Menu actions container.
+            Visibility is controlled at runtime depending on the current UI view.
+            Exposes shortcut buttons for highscores display and player-count toggling.
+        -->
+        <div class="center" id="menu-buttons">
+            <button class="menu-button" id="highscores-button">See high scores</button>
+            <button class="menu-button" id="toggleNumberOfPlayers-button">Add a player</button>
+        </div>
+
+        <!-- 
+            Loads JavaScript dependencies in a deliberate order:
+            - cookies.js: session storage helpers (names, scores, highscores persistence)
+            - NoteType.js: note type registry and onCatch strategies
+            - Note.js: falling note runtime entity
+            - Game.js: core engine, state, update/render loop
+            - game.js: per-player Game instantiation and asset wiring
+            - highscores.js: highscores rendering and table rebuilding
+            - menu.js: menu handlers and UI helpers
+            - main.js: global control flow, input routing, and view transitions
+        -->
+        <script src="./js/cookies.js"></script>
+        <script src="./js/NoteType.js"></script>
+        <script src="./js/Note.js"></script>
+        <script src="./js/Game.js"></script>
+        <script src="./js/game.js"></script>
+        <script src="./js/highscores.js"></script>
+        <script src="./js/menu.js"></script>
+        <script src="./js/main.js"></script>
+    </body>
+</html>

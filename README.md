@@ -16,3 +16,7 @@ Le jeu propose :
 - des animations visuelles et sonores,
 
 - un classement des meilleurs scores stocké sur la session.
+
+Le jeu est accessible en ligne via l'URL suivante :
+
+- https://etud.insa-toulouse.fr/~fdelbreil/insa_s_grade_rain_of_death/
